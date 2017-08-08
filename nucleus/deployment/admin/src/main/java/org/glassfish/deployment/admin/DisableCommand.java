@@ -353,22 +353,6 @@ public class DisableCommand extends UndeployCommandParameters implements AdminCo
             }
         }
 
-        /*
-         * If the target is a cluster instance, the DAS will broadcast the command
-         * to all instances in the cluster so they can all update their configs.
-         */
-        if (env.isDas()) {
-            try {
-                notifier.ensureBeforeReported(ExtendedDeploymentContext.Phase.REPLICATION);
-                DeploymentCommandUtils.replicateEnableDisableToContainingCluster(
-                        "disable", domain, target, appName, habitat, context, this);
-
-            } catch (Exception e) {
-                report.failure(logger, e.getMessage());
-                return;
-            }
-        }
-
         ApplicationInfo appInfo = deployment.get(appName);
         
         try {
