@@ -172,6 +172,7 @@ public class EmbeddedDeployerImpl implements EmbeddedDeployer {
         if (archiveHandler==null) {
                 throw new RuntimeException("Cannot find archive handler for source archive");
         }
+        initialContext.setArchiveHandler(archiveHandler);
         if (params.name==null) {
                 params.name = archiveHandler.getDefaultApplicationName(archive, initialContext);
             }
